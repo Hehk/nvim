@@ -4,9 +4,9 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
@@ -57,9 +57,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
-
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+-- All meta level keybindings (editor shit)
+vim.keymap.set('n', '<leader>mr', '<cmd>source $MYVIMRC<CR>')
+vim.keymap.set('n', '<leader>mps', '<cmd>PackerSync<CR>')
+vim.keymap.set('n', '<leader>mc', '<cmd>!code %<CR>')
