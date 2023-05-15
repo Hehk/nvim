@@ -1,155 +1,59 @@
 vim.cmd [[packadd packer.nvim]]
 
-if vim.g.vscode then
-    return require('packer').startup(function(use)
-        use 'wbthomason/packer.nvim'
-        use 'nvim-lua/plenary.nvim'
-        use 'svermeulen/vim-cutlass'
-        use 'tpope/vim-surround'
-        use 'tpope/vim-commentary'
-        use {
-            'phaazon/hop.nvim',
-            branch = 'v2'
-        }
-    end)
-else
-    return require('packer').startup(function(use)
-        use 'wbthomason/packer.nvim'
+return require('packer').startup(function(use)
+    use { 'wbthomason/packer.nvim' }
+    use { 'nvim-lua/plenary.nvim' }
+    use { 'svermeulen/vim-cutlass' }
+    use { 'tpope/vim-surround' }
+    use { 'tpope/vim-commentary' }
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v2'
+    }
+    use {
+        "folke/which-key.nvim",
+        disable = vim.g.vscode,
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
 
-        use {
-            'svermeulen/vim-cutlass',
-            config = function()
-                vim.keymap.set({'n', 'v'}, 'm', 'd')
-                vim.keymap.set('n', 'mm', 'dd')
-                vim.keymap.set('n', 'M', 'D')
-            end
-        }
+    use { 'nvim-telescope/telescope.nvim', disable = vim.g.vscode}
+    use {'nvim-treesitter/nvim-treesitter', disable = vim.g.vscode, {
+        run = ':TSUpdate'
 
-        use 'tpope/vim-surround'
-        use 'tpope/vim-commentary'
+    }}
+    use { 'nvim-treesitter/playground', disable = vim.g.vscode}
 
-        use {
-            'phaazon/hop.nvim',
-            branch = 'v2',
-            config = function()
-                local hop = require('hop')
-                hop.setup {
-                    keys = 'etovxqpdygfblzhckisuran'
-                }
+    use { 'ThePrimeagen/harpoon', disable = vim.g.vscode}
+    use { 'mbbill/undotree', disable = vim.g.vscode }
+    use { 'tpope/vim-fugitive', disable = vim.g.vscode }
+    use { "github/copilot.vim", disable = vim.g.vscode }
+    use { "rakr/vim-two-firewatch", disable = vim.g.vscode }
+    use {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+        disable = vim.g.vscode,
+    }
 
-                local directions = require('hop.hint').HintDirection
-                vim.keymap.set('', 'f', function()
-                    hop.hint_char1({
-                        direction = directions.AFTER_CURSOR,
-                        current_line_only = true
-                    })
-                end, {
-                    remap = true
-                })
-                vim.keymap.set('', 'F', function()
-                    hop.hint_char1({
-                        direction = directions.BEFORE_CURSOR,
-                        current_line_only = true
-                    })
-                end, {
-                    remap = true
-                })
-                vim.keymap.set('', 't', function()
-                    hop.hint_char1({
-                        direction = directions.AFTER_CURSOR,
-                        current_line_only = true,
-                        hint_offset = -1
-                    })
-                end, {
-                    remap = true
-                })
-                vim.keymap.set('', 'T', function()
-                    hop.hint_char1({
-                        direction = directions.BEFORE_CURSOR,
-                        current_line_only = true,
-                        hint_offset = 1
-                    })
-                end, {
-                    remap = true
-                })
-            end
-        }
+    use {'nvim-lualine/lualine.nvim', disable = vim.g.vscode}
 
-        use {
-            "folke/which-key.nvim",
-            config = function()
-                vim.o.timeout = true
-                vim.o.timeoutlen = 300
-                require("which-key").setup {
-                    -- your configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
-                }
-            end
-        }
+    use {
+        "sourcegraph/sg.nvim",
+        run = "cargo build --workspace",
+        requires = {"nvim-lua/plenary.nvim"},
+        disable = vim.g.vscode
+    }
 
-        use 'nvim-lua/plenary.nvim'
-        use 'nvim-telescope/telescope.nvim'
-
-        use {'nvim-treesitter/nvim-treesitter', {
-            run = ':TSUpdate'
-        }}
-        use 'nvim-treesitter/playground'
-
-        use 'ThePrimeagen/harpoon'
-        use 'mbbill/undotree'
-        use 'tpope/vim-fugitive'
-
-        -- use {
-        --     'VonHeikemen/lsp-zero.nvim',
-        --     branch = 'v2.x',
-        --     requires = {
-        --         -- LSP Support
-        --         { 'neovim/nvim-lspconfig' }, -- Required
-        --         {
-        --             -- Optional
-        --             'williamboman/mason.nvim',
-        --             run = function()
-        --                 pcall(vim.cmd, 'MasonUpdate')
-        --             end,
-        --         },
-        --         { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-        --         -- Autocompletion
-        --         { 'hrsh7th/nvim-cmp' },     -- Required
-        --         { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-        --         { 'L3MON4D3/LuaSnip' },     -- Required
-        --     }
-        -- }
-
-        use "github/copilot.vim"
-        use "Yazeed1s/minimal.nvim"
-        use "rebelot/kanagawa.nvim"
-        use "rakr/vim-two-firewatch"
-
-        use {
-            "folke/trouble.nvim",
-            requires = "nvim-tree/nvim-web-devicons",
-            config = function()
-                require("trouble").setup {
-                    -- your configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
-                }
-            end
-        }
-
-        use 'nvim-lualine/lualine.nvim'
-
-        use {
-            "sourcegraph/sg.nvim",
-            run = "cargo build --workspace",
-            requires = {"nvim-lua/plenary.nvim"}
-        }
-
-        use({
-            "jose-elias-alvarez/null-ls.nvim",
-            requires = {"nvim-lua/plenary.nvim"}
-        })
-    end)
-end
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = {"nvim-lua/plenary.nvim"},
+        disable = vim.g.vscode
+    })
+end)
