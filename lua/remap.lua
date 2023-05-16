@@ -58,6 +58,6 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- All meta level keybindings (editor shit)
-vim.keymap.set('n', '<leader>mr', '<cmd>source $MYVIMRC<CR>')
-vim.keymap.set('n', '<leader>mps', '<cmd>PackerSync<CR>')
-vim.keymap.set('n', '<leader>mc', '<cmd>!code %<CR>')
+vim.keymap.set("n", "<leader>mr", "<cmd>source $MYVIMRC<CR>")
+vim.keymap.set("n", "<leader>mps", "<cmd>PackerSync<CR>")
+vim.keymap.set("n", "<leader>mc", "<cmd>!code %<CR>")
