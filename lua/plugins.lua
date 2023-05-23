@@ -28,13 +28,15 @@ return require("packer").startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", disable = vim.g.vscode, {
 		run = ":TSUpdate",
 	} })
+	use({ "nvim-treesitter/nvim-treesitter-context", disable = vim.g.vscode })
 	use({ "nvim-treesitter/playground", disable = vim.g.vscode })
 
 	use({ "ThePrimeagen/harpoon", disable = vim.g.vscode })
 	use({ "mbbill/undotree", disable = vim.g.vscode })
 	use({ "tpope/vim-fugitive", disable = vim.g.vscode })
 	use({ "github/copilot.vim", disable = vim.g.vscode })
-	use({ "rakr/vim-two-firewatch", disable = vim.g.vscode })
+	use({ "rebelot/kanagawa.nvim", disable = vim.g.vscode })
+  use({ 'catppuccin/nvim', disable = vim.g.vscode })
 	use({
 		"folke/trouble.nvim",
 		requires = "nvim-tree/nvim-web-devicons",
@@ -69,5 +71,5 @@ return require("packer").startup(function(use)
 	})
 
 	use("mhartington/formatter.nvim")
-  use("stevearc/oil.nvim")
+	use("stevearc/oil.nvim")
 end)
