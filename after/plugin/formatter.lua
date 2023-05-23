@@ -16,6 +16,9 @@ formatter.setup({
 		javascript = {
 			require("formatter.defaults").prettier,
 		},
+		rust = {
+			require("formatter.filetypes.rust").rustfmt,
+		},
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 			function()
@@ -42,5 +45,5 @@ formatter.setup({
 	},
 })
 
-vim.keymap.set('n', '<leader>f', '<cmd>Format<cr>')
-vim.keymap.set('n', '<leader>F', '<cmd>FormatWrite<cr>')
+vim.keymap.set("n", "<leader>f", "<cmd>Format<cr>")
+vim.keymap.set("n", "<leader>F", "<cmd>FormatWrite<cr>")
